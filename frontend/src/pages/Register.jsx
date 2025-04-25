@@ -1,4 +1,3 @@
-// src/pages/Register.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/auth';
@@ -6,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 import { motion } from 'framer-motion';
 
 const Register = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', country: '' });
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -63,12 +62,23 @@ const Register = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         />
+        <motion.input
+          type="text"
+          placeholder="Country"
+          className="border p-2 rounded"
+          value={form.country}
+          onChange={(e) => setForm({ ...form, country: e.target.value })}
+          required
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        />
         <motion.button
           type="submit"
           className="bg-green-600 text-white py-2 rounded"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
+          transition={{ duration: 0.5, delay: 1 }}
         >
           Register
         </motion.button>

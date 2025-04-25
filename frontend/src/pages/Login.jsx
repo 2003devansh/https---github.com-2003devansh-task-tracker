@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/auth';
@@ -15,10 +14,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await loginUser({ email, password });
-      login(res.user, res.token);
-      navigate('/');
+      if (res && res._id && res.token) {
+        login(res, res.token);
+        navigate('/dashboard');
+      }
     } catch (err) {
       alert('Invalid credentials');
+      console.error(err);
     }
   };
 

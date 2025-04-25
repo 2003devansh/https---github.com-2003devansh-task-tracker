@@ -15,8 +15,6 @@ const app = express();
 // CORS configuration to allow only requests from the front-end
 const corsOptions = {
   origin: 'http://localhost:5173',  // Replace with your front-end's URL
-  methods: 'GET,POST,PUT,DELETE',  // Allow specific HTTP methods
-  allowedHeaders: 'Content-Type,Authorization',  // Allow certain headers
 };
 
 app.use(cors(corsOptions));  // Apply CORS middleware with the options

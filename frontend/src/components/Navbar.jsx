@@ -1,29 +1,24 @@
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext); // Direct usage
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const { user, logout } = useAuth();
 
   return (
-    <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-      <Link to="/" className="text-2xl font-bold text-blue-600">TaskFlow</Link>
-      <div className="flex items-center gap-4">
+    <nav className="p-4 bg-gray-100 flex justify-between">
+      <div>
+        <Link to="/" className="font-bold text-lg">TaskManager</Link>
+      </div>
+      <div className="space-x-4">
         {user ? (
           <>
-            <Link to="/dashboard" className="text-gray-700 hover:text-blue-600">Dashboard</Link>
-            <button onClick={handleLogout} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Logout</button>
+            <span>{user.name}</span>
+            <button onClick={logout} className="text-red-500">Logout</button>
           </>
         ) : (
           <>
-            <Link to="/login" className="text-gray-700 hover:text-blue-600">Login</Link>
-            <Link to="/register" className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Sign Up</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
           </>
         )}
       </div>
